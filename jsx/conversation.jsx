@@ -5,7 +5,7 @@ class Conversation extends Component {
     render() {
         return(
             <div className="conversation">
-                <h1>Conversation:</h1>
+                <h1>Chat: </h1>
                 {
                     this.props.messages.map((messages,i) => {
                         return (
