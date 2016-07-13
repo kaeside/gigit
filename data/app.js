@@ -13,3 +13,9 @@ io.on('connection', function (socket) {
 });
 
 server.listen(8080);
+
+module.exports = http;
+module.exports = express;
+module.exports = io;
+module.exports = app;
+module.exports = server;

@@ -5,18 +5,24 @@ import ConversationForm from './conversation-form';
 import conversation from './conversation';
 import User from './users';
 
+import app from '../data/app.js'.app;
+import io from '../data/app.js'.io;
+import express from '../data/app.js'.express;
+import http from '../data/app.js'.http;
+import server from '../data/app.js'.server;
+
 let socket = io.connect();
 
 let reactRedux = require('react-redux');
-let Connect = reactRedux.connect;
-let Provider = reactRedux.Provider;
+// let Connect = reactRedux.connect;
+// let Provider = reactRedux.Provider;
 
-let router = require('react-router');
-let Router = router.Router;
-let Route = router.Route;
-let hashHistory = router.hashHistory;
-let IndexRoute = router.IndexRoute;
-let Link = router.Link;
+// let router = require('react-router');
+// let Router = router.Router;
+// let Route = router.Route;
+// let hashHistory = router.hashHistory;
+// let IndexRoute = router.IndexRoute;
+// let Link = router.Link;
 
 class GigIt extends Component {
     getInitialState() {
@@ -78,5 +84,5 @@ class GigIt extends Component {
 
 document.addEventListener('DOMContentLoaded', function () {
     ReactDOM.render(
-        <GigItChat/>, document.getElementById('app'));
+        <GigIt />, document.getElementById('app'));
 });
