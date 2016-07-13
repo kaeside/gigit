@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import Message from './jsx/message.jsx';
+
+class Conversation extends Component {
+    render() {
+        return(
+            <div className="conversation">
+                <h1>Conversation:</h1>
+                {
+                    this.props.messages.map((messages,i) => {
+                        return (
+                            <Message
+                                key={i}
+                                user={message.user}
+                                text={message.text}
+                            />
+                        );
+                    })
+                }
+            </div>
+        );
+    }
+}
+
+module.exports = Conversation;
