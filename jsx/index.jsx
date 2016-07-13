@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+
 import ConversationForm from './conversation-form';
 import conversation from './conversation';
 import User from './users';
 
-let socket = require('socket.io');
+let socket = io.connect();
 
 let reactRedux = require('react-redux');
 let Connect = reactRedux.connect;
