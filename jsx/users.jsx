@@ -9,9 +9,7 @@ class Users extends Component {
                     {this.propos.users.map((user,i) => {
                         return (
                             //STORES LIST OF USERS. EACH LI IS A USER
-                            <li key={i}>
-                            {user}
-                            </li>
+                            <li key={i}>{user}</li>
                         );
                     }
                 )}
