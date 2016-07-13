@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ConversationForm from './jsx/conversation-form';
+import ConversationForm from './jsx/conversation-form.jsx';
 let socket = require('socket.io');
 
 let reactRedux = require('react-redux');
@@ -21,30 +21,30 @@ class GigIt extends Component {
             messages: [],
             text: ''
             });
-    },
+    }
 
     componentDidMount() {
         socket.on('init', this.initialize);
         socket.on('send:message', this.messageRecieve);
-    },
+    }
 
     initialize(data) {
         let {users, name} = data;
         this.setState({users, user: name});
-    },
+    }
 
     messageRecieve(message) {
         let {messages} = this.state;
         messages.push(message);
         this.setState({messages});
-    },
+    }
 
     handleMessageSubmit(message) {
         let {messages} = this.state;
         messages.push(message);
         this.setState({messages});
         socket.emit('send:message', message);
-    },
+    }
 
     render() {
         return (

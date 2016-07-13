@@ -1,8 +1,8 @@
-import path from 'path';
+var path = require('path');
 
-import webpack from 'webpack';
+var webpack = require('webpack');
 
-import packageData from './package.json';
+var packageData = require('./package.json');
 
 var filename = [packageData.name, packageData.version, 'js'];
 
