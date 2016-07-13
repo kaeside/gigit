@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Message from './jsx/message.jsx';
+import Message from './message.jsx';
 
 class Conversation extends Component {
     render() {

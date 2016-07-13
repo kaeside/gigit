@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import ConversationForm from './jsx/conversation-form.jsx';
+import ConversationForm from './conversation-form';
+import conversation from './conversation';
+import User from './users';
+
 let socket = require('socket.io');
 
 let reactRedux = require('react-redux');

@@ -5,7 +5,7 @@ class ConversationForm extends Component{
         return (
             text: ''
         );
-    },
+    }
 
     handleOnSubmit(event) {
         event.preventDefault();
@@ -17,13 +17,13 @@ class ConversationForm extends Component{
         this.setState({
             text: ''
         });
-    },
+    }
 
     changeHandler(event) {
         this.setState({
             text : event.target.value
         });
-    },
+    }
 
     render() {
         return(
