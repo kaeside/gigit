@@ -6,7 +6,7 @@ class Users extends Component {
             <div className="users">
                 <h1>Online Users</h1>
                 <ul>
-                    {this.propos.users.map((user,i) => {
+                    {this.props.users.map((user,i) => {
                         return (
                             //STORES LIST OF USERS. EACH LI IS A USER
                             <li key={i}>{user}</li>
