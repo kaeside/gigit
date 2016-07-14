@@ -2,14 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import ConversationForm from './conversation-form';
-import conversation from './conversation';
-import User from './users';
+import Conversation from './conversation';
+import Users from './users';
 
-import app from '../data/app.js'.app;
-import io from '../data/app.js'.io;
-import express from '../data/app.js'.express;
-import http from '../data/app.js'.http;
-import server from '../data/app.js'.server;
+// import io from '../data/app.js'.io;
 
 let socket = io.connect();
 
@@ -24,38 +20,21 @@ let reactRedux = require('react-redux');
 // let IndexRoute = router.IndexRoute;
 // let Link = router.Link;
 
-class GigIt extends Component {
-    getInitialState() {
-        return ({
-            users: [],
-            messages: [],
-            text: ''
-            });
-    }
 
-    componentDidMount() {
-        socket.on('init', this.initialize);
-        socket.on('send:message', this.messageRecieve);
-    }
+class GigIt extends React.Component {
+constructor() {
+  super();
+  this. _componentDidMount = this. _componentDidMount.bind(this);
+  this. _initialize = this. _initialize.bind(this);
+  this. _messageRecieve = this. _messageRecieve.bind(this);
+  this. _handleMessageSubmit = this. _handleMessageSubmit.bind(this);
 
-    initialize(data) {
-        let {users, name} = data;
-        this.setState({users, user: name});
-    }
-
-    messageRecieve(message) {
-        let {messages} = this.state;
-        messages.push(message);
-        this.setState({messages});
-    }
-
-    handleMessageSubmit(message) {
-        let {messages} = this.state;
-        messages.push(message);
-        this.setState({messages});
-        socket.emit('send:message', message);
-    }
-
+  this.state = {
+      users: [],
+      messages: [],
+      text: ''
+      }
+ }
     render() {
         return (
             <div className="container">
@@ -71,6 +50,28 @@ class GigIt extends Component {
                 </div>
             </div>
         );
+    }
+    _componentDidMount() {
+        socket.on('init', this.initialize);
+        socket.on('send:message', this.messageRecieve);
+    }
+
+    _initialize(data) {
+        let {users, name} = data;
+        this.setState({users, user: name});
+    }
+
+    _messageRecieve(message) {
+        let {messages} = this.state;
+        messages.push(message);
+        this.setState({messages});
+    }
+
+    _handleMessageSubmit(message) {
+        let {messages} = this.state;
+        messages.push(message);
+        this.setState({messages});
+        socket.emit('send:message', message);
     }
 };
 
