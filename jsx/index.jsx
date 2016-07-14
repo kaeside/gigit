@@ -38,8 +38,10 @@ constructor() {
     render() {
         return (
             <div className="container">
-                <h1>GigIt</h1>
-                <p>Chat with your local business and schedule appointments!</p>
+              <div className="header">
+                 <h1>GigIt</h1>
+                  <h1>Chat with your local business and schedule appointments!</h1>
+                </div>
                 <div className='appContainer'>
                     <Users users={this.state.users} />
                     <Conversation messages={this.state.messages}/>
