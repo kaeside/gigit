@@ -1,43 +1,33 @@
-// var socket_io = require('socket.io');
-// var http = require('http');
-// var express = require('express');
-//
-// var app = express();
-// app.use(express.static('public'));
-//
-// var server = http.Server(app);
-// var io = socket_io(server);
-//
-// io.on('connection', function (socket) {
-//     console.log('Client connected');
-//
-//     // socket.on('send:message', function (data) {
-//     //     socket.broadcast.emit('send:message', {
-//     //         text: data.text
-//     //     });
-//     // });
-// });
-//
-// server.listen(8080);
-//
-// var io = require('socket.io')('http://localhost:8080');
-//
+'use strict';
 
+/**
+ * Module dependencies.
+ */
 
-var socket_io = require('socket.io');
-var http = require('http');
 var express = require('express');
+var http = require('http');
+
+var socket = require('./routes/socket.js');
 
 var app = express();
-app.use(express.static('public'));
+var server = http.createServer(app);
 
-var server = http.Server(app);
-var io = socket_io(server);
+/* Configuration */
+app.set('views', __dirname + '/views');
+app.use(express.static(__dirname + '/public'));
+app.set('port', 9000);
 
-io.on('connection', function (socket) {
-    console.log('Client connected');
+// if (process.env.NODE_ENV === 'You are in test development') {
+// 	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+// }
+
+/* Socket.io Communication */
+var io = require('socket.io').listen(server);
+io.sockets.on('connection', socket);
+
+/* Start server */
+server.listen(app.get('port'), function (){
+  console.log('Listening on Port 9000!', app.get('port'));
 });
 
-server.listen(8080);
-
-// module.exports = io;
+module.exports = app;
