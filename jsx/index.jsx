@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 
 import ConversationForm from './conversation-form';
 import Conversation from './conversation';
-import Users from './users';
-
+import Users from './Users';
+import Chatty from './Chatty'
 // import io from '../data/app.js'.io;
-
+// var io = require('socket.io')('httplocalhost:8080');
 let socket = io.connect();
 
 let reactRedux = require('react-redux');
@@ -37,25 +37,65 @@ constructor() {
  }
     render() {
         return (
-            <div className="container">
-              <div className="header">
-                 <h1>GigIt</h1>
-                  <h1>Chat with your local business and schedule appointments!</h1>
+
+          <div className="home">
+          <header className="main-header">
+             <div className="container">
+                <div className="header-content">
+                   <a href="index.html">
+                      <img src="img/site-identity.png" alt="site identity" />
+                   </a>
+
+                   <nav className="site-nav">
+                      <ul className="clean-list site-links">
+                         <li>
+                            <a href="#">Top Local Vendors</a>
+                         </li>
+                         <li>
+                            <a href="#">Add a Vendor</a>
+                         </li>
+                      </ul>
+
+                      <a href="#" className="btn btn-outlined">Sign up</a>
+                   </nav>
                 </div>
-                <div className='appContainer'>
+             </div>
+          </header>
+
+
+              <div className="content-box">
+                 <section className="section section-hero">
+                    <div className="hero-box">
+                       <div className="container">
+                          <div className="hero-text align-center">
+                             <h1>Make an appointment</h1>
+                             <p>Chat with local businesses now!</p>
+                          </div>
+
+                          <form className="destinations-form">
+                             <div className="input-line">
+                                <input type="text" name="destination" value="" className="form-input check-value" placeholder="WRITE FIRST YOUR MESSAGE HERE" />
+                                <button type="button" name="destination-submit" className="form-submit btn btn-special">Chat Now</button>
+                             </div>
+                          </form>
+                       </div>
+                    </div>
+                  </section>
+                <div className='appContainer hero-text align-center'>
                     <Users users={this.state.users} />
                     <Conversation messages={this.state.messages}/>
                     <ConversationForm
                     users={this.state.user}
-                    onMessageSubmit={this.handleMessageSubmit}
+                    onMessageSubmit={this._handleMessageSubmit}
                     />
                 </div>
+              </div>
             </div>
         );
     }
     _componentDidMount() {
         socket.on('init', this.initialize);
-        socket.on('send:message', this.messageRecieve);
+        socket.on('send:message', this._messageRecieve);
     }
 
     _initialize(data) {
