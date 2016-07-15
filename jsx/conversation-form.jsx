@@ -18,9 +18,9 @@ class ConversationForm extends React.Component{
         return(
             <div className='conversation_form'>
             <h3>Write New Message</h3>
-            <form onSubmit={this.handleOnSubmit}>
+            <form onSubmit={this._handleOnSubmit}>
                 <input
-                    onChange={this.changeHandler}
+                    onChange={this._changeHandler}
                     value={this.state.text}
                 />
             <button onClick={this._handleOnSubmit}></button>
