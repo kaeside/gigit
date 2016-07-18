@@ -18,312 +18,303 @@ var _react2 = _interopRequireDefault(_react);
 var socket = io.connect();
 
 var UsersList = (function (_Component) {
-	_inherits(UsersList, _Component);
+    _inherits(UsersList, _Component);
 
-	function UsersList() {
-		_classCallCheck(this, UsersList);
+    function UsersList() {
+        _classCallCheck(this, UsersList);
 
-		_get(Object.getPrototypeOf(UsersList.prototype), 'constructor', this).apply(this, arguments);
-	}
+        _get(Object.getPrototypeOf(UsersList.prototype), 'constructor', this).apply(this, arguments);
+    }
 
-	_createClass(UsersList, [{
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				{ className: 'users' },
-				_react2['default'].createElement(
-					'h3',
-					null,
-					' Online Users '
-				),
-				_react2['default'].createElement(
-					'ul',
-					null,
-					this.props.users.map(function (user, i) {
-						return _react2['default'].createElement(
-							'li',
-							{ key: i },
-							user
-						);
-					})
-				)
-			);
-		}
-	}]);
+    _createClass(UsersList, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'users' },
+                _react2['default'].createElement(
+                    'h3',
+                    null,
+                    'Online Users'
+                ),
+                _react2['default'].createElement(
+                    'ul',
+                    null,
+                    this.props.users.map(function (user, i) {
+                        return _react2['default'].createElement(
+                            'li',
+                            { key: i },
+                            user
+                        );
+                    })
+                )
+            );
+        }
+    }]);
 
-	return UsersList;
+    return UsersList;
 })(_react.Component);
 
 ;
 
 var Message = (function (_Component2) {
-	_inherits(Message, _Component2);
+    _inherits(Message, _Component2);
 
-	function Message() {
-		_classCallCheck(this, Message);
+    function Message() {
+        _classCallCheck(this, Message);
 
-		_get(Object.getPrototypeOf(Message.prototype), 'constructor', this).apply(this, arguments);
-	}
+        _get(Object.getPrototypeOf(Message.prototype), 'constructor', this).apply(this, arguments);
+    }
 
-	_createClass(Message, [{
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				{ className: 'message' },
-				_react2['default'].createElement(
-					'strong',
-					null,
-					this.props.user,
-					' :'
-				),
-				_react2['default'].createElement(
-					'span',
-					null,
-					this.props.text
-				)
-			);
-		}
-	}]);
+    _createClass(Message, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'message' },
+                _react2['default'].createElement(
+                    'strong',
+                    null,
+                    this.props.user,
+                    ':'
+                ),
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    this.props.text
+                )
+            );
+        }
+    }]);
 
-	return Message;
+    return Message;
 })(_react.Component);
 
 ;
 
 var MessageList = (function (_Component3) {
-	_inherits(MessageList, _Component3);
+    _inherits(MessageList, _Component3);
 
-	function MessageList() {
-		_classCallCheck(this, MessageList);
+    function MessageList() {
+        _classCallCheck(this, MessageList);
 
-		_get(Object.getPrototypeOf(MessageList.prototype), 'constructor', this).apply(this, arguments);
-	}
+        _get(Object.getPrototypeOf(MessageList.prototype), 'constructor', this).apply(this, arguments);
+    }
 
-	_createClass(MessageList, [{
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				{ className: 'messages' },
-				_react2['default'].createElement(
-					'h2',
-					null,
-					' Chat: '
-				),
-				this.props.messages.map(function (message, i) {
-					return _react2['default'].createElement(Message, {
-						key: i,
-						user: message.user,
-						text: message.text
-					});
-				})
-			);
-		}
-	}]);
+    _createClass(MessageList, [{
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'messages' },
+                _react2['default'].createElement(
+                    'h2',
+                    null,
+                    'Chat:'
+                ),
+                this.props.messages.map(function (message, i) {
+                    return _react2['default'].createElement(Message, { key: i, user: message.user, text: message.text });
+                })
+            );
+        }
+    }]);
 
-	return MessageList;
+    return MessageList;
 })(_react.Component);
 
 ;
 
 var MessageForm = (function (_Component4) {
-	_inherits(MessageForm, _Component4);
+    _inherits(MessageForm, _Component4);
 
-	function MessageForm() {
-		_classCallCheck(this, MessageForm);
+    function MessageForm() {
+        _classCallCheck(this, MessageForm);
 
-		_get(Object.getPrototypeOf(MessageForm.prototype), 'constructor', this).call(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.changeHandler = this.changeHandler.bind(this);
-		this.state = { text: '' };
-	}
+        _get(Object.getPrototypeOf(MessageForm.prototype), 'constructor', this).call(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
+        this.state = {
+            text: ''
+        };
+    }
 
-	_createClass(MessageForm, [{
-		key: 'handleSubmit',
-		value: function handleSubmit(event) {
-			event.preventDefault();
-			var message = {
-				user: this.props.user,
-				text: this.state.text
-			};
-			this.props.onMessageSubmit(message);
-			this.setState({ text: '' });
-		}
-	}, {
-		key: 'changeHandler',
-		value: function changeHandler(event) {
-			this.setState({ text: event.target.value });
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				{ className: 'message_form' },
-				_react2['default'].createElement(
-					'h3',
-					null,
-					'Write New Message'
-				),
-				_react2['default'].createElement(
-					'form',
-					{ onSubmit: this.handleSubmit },
-					_react2['default'].createElement('input', {
-						onChange: this.changeHandler,
-						value: this.state.text
-					})
-				)
-			);
-		}
-	}]);
+    _createClass(MessageForm, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+            var message = {
+                user: this.props.user,
+                text: this.state.text
+            };
+            this.props.onMessageSubmit(message);
+            this.setState({ text: '' });
+        }
+    }, {
+        key: 'changeHandler',
+        value: function changeHandler(event) {
+            this.setState({ text: event.target.value });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'message_form' },
+                _react2['default'].createElement(
+                    'h3',
+                    null,
+                    'Write New Message'
+                ),
+                _react2['default'].createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit },
+                    _react2['default'].createElement('input', { onChange: this.changeHandler, value: this.state.text })
+                )
+            );
+        }
+    }]);
 
-	return MessageForm;
+    return MessageForm;
 })(_react.Component);
 
 ;
 
 var ChangeNameForm = (function (_Component5) {
-	_inherits(ChangeNameForm, _Component5);
+    _inherits(ChangeNameForm, _Component5);
 
-	function ChangeNameForm() {
-		_classCallCheck(this, ChangeNameForm);
+    function ChangeNameForm() {
+        _classCallCheck(this, ChangeNameForm);
 
-		_get(Object.getPrototypeOf(ChangeNameForm.prototype), 'constructor', this).call(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.onKey = this.onKey.bind(this);
-		this.state = { newName: '' };
-	}
+        _get(Object.getPrototypeOf(ChangeNameForm.prototype), 'constructor', this).call(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onKey = this.onKey.bind(this);
+        this.state = {
+            newName: ''
+        };
+    }
 
-	_createClass(ChangeNameForm, [{
-		key: 'onKey',
-		value: function onKey(event) {
-			this.setState({ newName: event.target.value });
-		}
-	}, {
-		key: 'handleSubmit',
-		value: function handleSubmit(event) {
-			event.preventDefault();
-			var newName = this.state.newName;
-			this.props.onChangeName(newName);
-			this.setState({ newName: '' });
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				{ className: 'change_name_form' },
-				_react2['default'].createElement(
-					'h3',
-					null,
-					' Change Name '
-				),
-				_react2['default'].createElement(
-					'form',
-					{ onSubmit: this.handleSubmit },
-					_react2['default'].createElement('input', {
-						onChange: this.onKey,
-						value: this.state.newName
-					})
-				)
-			);
-		}
-	}]);
+    _createClass(ChangeNameForm, [{
+        key: 'onKey',
+        value: function onKey(event) {
+            this.setState({ newName: event.target.value });
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+            var newName = this.state.newName;
+            this.props.onChangeName(newName);
+            this.setState({ newName: '' });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                { className: 'change_name_form' },
+                _react2['default'].createElement(
+                    'h3',
+                    null,
+                    'Change Name'
+                ),
+                _react2['default'].createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit },
+                    _react2['default'].createElement('input', { onChange: this.onKey, value: this.state.newName })
+                )
+            );
+        }
+    }]);
 
-	return ChangeNameForm;
+    return ChangeNameForm;
 })(_react.Component);
 
 ;
 
 var ChatApp = (function (_Component6) {
-	_inherits(ChatApp, _Component6);
+    _inherits(ChatApp, _Component6);
 
-	function ChatApp() {
-		_classCallCheck(this, ChatApp);
+    function ChatApp() {
+        _classCallCheck(this, ChatApp);
 
-		_get(Object.getPrototypeOf(ChatApp.prototype), 'constructor', this).call(this);
-		this._initialize = this._initialize.bind(this);
-		this._messageRecieve = this._messageRecieve.bind(this);
-		this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
-		this.handleChangeName = this.handleChangeName.bind(this);
-		this.state = { users: [], messages: [], text: '' };
-	}
+        _get(Object.getPrototypeOf(ChatApp.prototype), 'constructor', this).call(this);
+        this._initialize = this._initialize.bind(this);
+        this._messageRecieve = this._messageRecieve.bind(this);
+        this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.state = {
+            users: [],
+            messages: [],
+            text: ''
+        };
+    }
 
-	_createClass(ChatApp, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			socket.on('init', this._initialize);
-			socket.on('send:message', this._messageRecieve);
-			socket.on('change:name', this._userChangedName);
-		}
-	}, {
-		key: '_initialize',
-		value: function _initialize(data) {
-			var users = data.users;
-			var name = data.name;
+    _createClass(ChatApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            socket.on('init', this._initialize);
+            socket.on('send:message', this._messageRecieve);
+            socket.on('change:name', this._userChangedName);
+        }
+    }, {
+        key: '_initialize',
+        value: function _initialize(data) {
+            var users = data.users;
+            var name = data.name;
 
-			this.setState({ users: users, user: name });
-		}
-	}, {
-		key: '_messageRecieve',
-		value: function _messageRecieve(message) {
-			var messages = this.state.messages;
+            this.setState({ users: users, user: name });
+        }
+    }, {
+        key: '_messageRecieve',
+        value: function _messageRecieve(message) {
+            var messages = this.state.messages;
 
-			messages.push(message);
-			this.setState({ messages: messages });
-		}
-	}, {
-		key: 'handleMessageSubmit',
-		value: function handleMessageSubmit(message) {
-			var messages = this.state.messages;
+            messages.push(message);
+            this.setState({ messages: messages });
+        }
+    }, {
+        key: 'handleMessageSubmit',
+        value: function handleMessageSubmit(message) {
+            var messages = this.state.messages;
 
-			messages.push(message);
-			this.setState({ messages: messages });
-			socket.emit('send:message', message);
-		}
-	}, {
-		key: 'handleChangeName',
-		value: function handleChangeName(newName) {
-			var _this = this;
+            messages.push(message);
+            this.setState({ messages: messages });
+            socket.emit('send:message', message);
+        }
+    }, {
+        key: 'handleChangeName',
+        value: function handleChangeName(newName) {
+            var _this = this;
 
-			var oldName = this.state.user;
-			socket.emit('change:name', { name: newName }, function (result) {
-				if (!result) {
-					return alert('There was an error changing your name');
-				}
-				var users = _this.state.users;
+            var oldName = this.state.user;
+            socket.emit('change:name', {
+                name: newName
+            }, function (result) {
+                if (!result) {
+                    return alert('Unable to change your name');
+                }
+                var users = _this.state.users;
 
-				var index = users.indexOf(oldName);
-				users.splice(index, 1, newName);
-				_this.setState({ users: users, user: newName });
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2['default'].createElement(
-				'div',
-				null,
-				_react2['default'].createElement(UsersList, {
-					users: this.state.users
-				}),
-				_react2['default'].createElement(MessageList, {
-					messages: this.state.messages
-				}),
-				_react2['default'].createElement(MessageForm, {
-					onMessageSubmit: this.handleMessageSubmit,
-					user: this.state.user
-				}),
-				_react2['default'].createElement(ChangeNameForm, {
-					onChangeName: this.handleChangeName
-				})
-			);
-		}
-	}]);
+                var index = users.indexOf(oldName);
+                users.splice(index, 1, newName);
+                _this.setState({ users: users, user: newName });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(UsersList, { users: this.state.users }),
+                _react2['default'].createElement(MessageList, { messages: this.state.messages }),
+                _react2['default'].createElement(MessageForm, { onMessageSubmit: this.handleMessageSubmit, user: this.state.user }),
+                _react2['default'].createElement(ChangeNameForm, { onChangeName: this.handleChangeName })
+            );
+        }
+    }]);
 
-	return ChatApp;
+    return ChatApp;
 })(_react.Component);
 
 ;
